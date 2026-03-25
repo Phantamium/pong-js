@@ -79,7 +79,7 @@ canvas.addEventListener("click", (e) => {
     }
     if (gameState === "over") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
-            
+
             left_score = 0;
             right_score = 0;
 
@@ -98,6 +98,7 @@ canvas.addEventListener("click", (e) => {
 });
 
 canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
     let touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
     let x = (touch.clientX - rect.left) * (canvas.width / rect.width);
@@ -118,7 +119,7 @@ canvas.addEventListener("touchstart", (e) => {
     //last gameover screen
     if (gameState === "over") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
-            
+
             left_score = 0;
             right_score = 0;
 
@@ -134,6 +135,37 @@ canvas.addEventListener("touchstart", (e) => {
             winner = "";
         }
     }
+    if (x < (rect.width * (canvas.width / rect.width) / 2)) {
+        // center paddle on finger
+        left_y = y - 40; // 40 = half paddle height
+        if (left_y < 0) left_y = 0;
+        if (left_y > 520) left_y = 520;
+    }
+    if (x > (rect.width * (canvas.width / rect.width) / 2)) {
+        right_y = y - 40
+        if (right_y < 0) right_y = 0;
+        if (right_y > 520) right_y = 520
+    }
+})
+
+canvas.addEventListener("touchmove", (e) => {
+    e.preventDefault();
+    let touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    let x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+    let y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+    if (x < (rect.width * (canvas.width / rect.width) / 2)) {
+        // center paddle on finger
+        left_y = y - 40; // 40 = half paddle height
+        if (left_y < 0) left_y = 0;
+        if (left_y > 520) left_y = 520;
+    }
+    if (x > (rect.width * (canvas.width / rect.width) / 2)) {
+        right_y = y - 40
+        if (right_y < 0) right_y = 0;
+        if (right_y > 520) right_y = 520
+    }
+
 })
 
 
