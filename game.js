@@ -74,7 +74,12 @@ canvas.addEventListener("click", (e) => {
 
         if (x > 250 && x < 550 && y > 420 && y < 480) {
             gameType = "multiPlayer";
-            gameState = "open"; 
+            gameState = "open";
+        }
+    }
+    if (gameState === "over") {
+        if (x > 250 && x < 550 && y > 370 && y < 430) {
+            gameState = "menu";
         }
     }
 });
@@ -85,15 +90,24 @@ canvas.addEventListener("touchstart", (e) => {
     let x = touch.clientX - rect.left;
     let y = touch.clientY - rect.top;
 
-    //singleplayer area
-    if (x > 250 && x < 550 && y > 370 && y < 430) {
-        gameType = "singlePlayer";
-        gameState = "open";
+    //menu area
+    if (gameState === "menu") {
+        if (x > 250 && x < 550 && y > 370 && y < 430) {
+            gameType = "singlePlayer";
+            gameState = "open";
+        }
+
+        if (x > 250 && x < 550 && y > 420 && y < 480) {
+            gameType = "multiPlayer";
+            gameState = "open";
+        }
     }
 
-    if (x > 250 && x < 550 && y > 420 && y < 480) {
-        gameType = "multiPlayer";
-        gameState = "open";
+    //last gameover screen
+    if (gameState === "over") {
+        if (x > 250 && x < 550 && y > 370 && y < 430) {
+            gameState = "menu";
+        }
     }
 })
 
@@ -236,8 +250,8 @@ function gameloop() {
         ctx.textAlign = "center";
         ctx.fillText("PONG", 400, 200);
 
-        ctx.font = "32px monospace";
-        ctx.fillText("Press Enter to Start", 400, 350);
+        // ctx.font = "32px monospace";
+        // ctx.fillText("Press Enter to Start", 400, 350);
 
         ctx.font = "32px monospace";
         ctx.fillText("SinglePlayer 's'", 400, 400);
