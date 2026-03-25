@@ -63,8 +63,9 @@ document.addEventListener("keyup", (e) => {
 
 canvas.addEventListener("touchstart", (e) => {
     let touch = e.touches[0];
-    let x = touch.clientX;
-    let y = touch.clientY;
+    const rect = canvas.getBoundingClientRect();
+    let x = touch.clientX - rect.left;
+    let y = touch.clientY - rect.top;
 
     //singleplayer area
     if (x > 250 && x < 550 && y > 370 && y < 430) {
