@@ -61,6 +61,24 @@ document.addEventListener("keyup", (e) => {
     keys[e.key] = false;
 })
 
+canvas.addEventListener("click", (e) => {
+    const rect = canvas.getBoundingClientRect();
+    let x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    let y = (e.clientY - rect.top) * (canvas.height / rect.height);
+
+    if (gameState === "menu") {
+        if (x > 250 && x < 550 && y > 370 && y < 430) {
+            gameType = "singlePlayer";
+            gameState = "open";
+        }
+
+        if (x > 250 && x < 550 && y > 420 && y < 480) {
+            gameType = "multiPlayer";
+            gameState = "open"; 
+        }
+    }
+});
+
 canvas.addEventListener("touchstart", (e) => {
     let touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
@@ -70,7 +88,12 @@ canvas.addEventListener("touchstart", (e) => {
     //singleplayer area
     if (x > 250 && x < 550 && y > 370 && y < 430) {
         gameType = "singlePlayer";
-        gameState = "open"
+        gameState = "open";
+    }
+
+    if (x > 250 && x < 550 && y > 420 && y < 480) {
+        gameType = "multiPlayer";
+        gameState = "open";
     }
 })
 
