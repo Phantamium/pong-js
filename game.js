@@ -3,12 +3,12 @@ const ctx = canvas.getContext("2d");
 
 let gameOver = false;
 let winner = "";
-let ball_x = 400;
-let ball_y = 300;
+let ball_x = canvas.width / 2;
+let ball_y = canvas.height / 2;
 let ball_vx = 4;
 let ball_vy = 4;
-let left_y = 300;
-let right_y = 300;
+let left_y = canvas.height / 2;
+let right_y = canvas.height / 2;
 let left_score = 0;
 let right_score = 0;
 let prev_ball_x = ball_x;
@@ -30,13 +30,13 @@ document.addEventListener("keydown", (e) => {
         left_score = 0;
         right_score = 0;
 
-        ball_x = 400;
-        ball_y = 300;
+        ball_x = canvas.width / 2;
+        ball_y = canvas.height / 2;
         ball_vx = 4;
         ball_vy = 4;
 
-        left_y = 300;
-        right_y = 300;
+        left_y = canvas.height / 2;
+        right_y = canvas.height / 2;
 
         gameState = 'menu';
         winner = "";
@@ -83,13 +83,13 @@ canvas.addEventListener("click", (e) => {
             left_score = 0;
             right_score = 0;
 
-            ball_x = 400;
-            ball_y = 300;
+            ball_x = canvas.width / 2;
+            ball_y = canvas.height / 2;
             ball_vx = 4;
             ball_vy = 4;
 
-            left_y = 300;
-            right_y = 300;
+            left_y = canvas.height / 2;
+            right_y = canvas.height / 2;
 
             gameState = "menu";
             winner = "";
@@ -105,12 +105,12 @@ canvas.addEventListener("touchstart", (e) => {
     let y = (touch.clientY - rect.top) * (canvas.height / rect.height);
     //menu area
     if (gameState === "menu") {
-        if (x > 250 && x < 550 && y > 370 && y < 430) {
+        if (x > canvas.width / 2 - 150 && x < canvas.width / 2 + 150 && y > canvas.height / 2 - 20 && y < canvas.height / 2 + 40) {
             gameType = "singlePlayer";
             gameState = "open";
         }
 
-        if (x > 250 && x < 550 && y > 420 && y < 480) {
+        if (x > canvas.width / 2 - 150 && x < canvas.width / 2 + 150 && y > canvas.height / 2 + 30 && y < canvas.height / 2 + 90) {
             gameType = "multiPlayer";
             gameState = "open";
         }
@@ -118,18 +118,19 @@ canvas.addEventListener("touchstart", (e) => {
 
     //last gameover screen
     if (gameState === "over") {
-        if (x > 250 && x < 550 && y > 370 && y < 430) {
+        if (x > canvas.width / 2 - 150 && x < canvas.width / 2 + 150 &&
+            y > canvas.height / 2 + 60 && y < canvas.height / 2 + 120) {
 
             left_score = 0;
             right_score = 0;
 
-            ball_x = 400;
-            ball_y = 300;
+            ball_x = canvas.width / 2;
+            ball_y = canvas.height / 2;
             ball_vx = 4;
             ball_vy = 4;
 
-            left_y = 300;
-            right_y = 300;
+            left_y = canvas.height / 2;
+            right_y = canvas.height / 2;
 
             gameState = "menu";
             winner = "";
@@ -139,12 +140,13 @@ canvas.addEventListener("touchstart", (e) => {
         // center paddle on finger
         left_y = y - 40; // 40 = half paddle height
         if (left_y < 0) left_y = 0;
-        if (left_y > 520) left_y = 520;
+        if (left_y > canvas.height - 80) left_y = canvas.height - 80;
+
     }
     if (x > (rect.width * (canvas.width / rect.width) / 2)) {
         right_y = y - 40
         if (right_y < 0) right_y = 0;
-        if (right_y > 520) right_y = 520
+        if (right_y > canvas.height - 80) right_y = canvas.height - 80;
     }
 })
 
@@ -158,12 +160,12 @@ canvas.addEventListener("touchmove", (e) => {
         // center paddle on finger
         left_y = y - 40; // 40 = half paddle height
         if (left_y < 0) left_y = 0;
-        if (left_y > 520) left_y = 520;
+        if (left_y > canvas.height - 80) left_y = canvas.height - 80;
     }
     if (x > (rect.width * (canvas.width / rect.width) / 2)) {
         right_y = y - 40
         if (right_y < 0) right_y = 0;
-        if (right_y > 520) right_y = 520
+        if (right_y > canvas.height - 80) right_y = canvas.height - 80;
     }
 
 })
@@ -179,10 +181,10 @@ function gameloop() {
         ball_x += ball_vx;
         ball_y += ball_vy;
         if (keys['w'] && left_y > 0) left_y -= 6;
-        if (keys['s'] && left_y < 520) left_y += 6;
+        if (keys['s'] && left_y < canvas.height - 80) left_y += 6;
         if (gameType == "multiPlayer") {
             if (keys["ArrowUp"] && right_y > 0) right_y -= 6;
-            if (keys["ArrowDown"] && right_y < 520) right_y += 6;
+            if (keys["ArrowDown"] && right_y < canvas.height - 80) right_y += 6;
         }
 
         left_paddle_vy = left_y - prev_left_y;
@@ -191,16 +193,16 @@ function gameloop() {
         //boundary conditions
         if (ball_x <= 5) {
             right_score += 1
-            ball_x = 400
-            ball_y = 300
+            ball_x = canvas.width / 2
+            ball_y = canvas.height / 2
             const options = [-3, -2, -1, 1, 2, 3];
             ball_vy = options[Math.floor(Math.random() * options.length)];
             ball_vx = 4
         }
-        if (ball_x >= 795) {
+        if (ball_x >= (canvas.width - 5)) {
             left_score += 1;
-            ball_x = 400;
-            ball_y = 300;
+            ball_x = canvas.width / 2;
+            ball_y = canvas.height / 2;
 
             const options = [-3, -2, -1, 1, 2, 3];
             ball_vy = options[Math.floor(Math.random() * options.length)];
@@ -211,8 +213,8 @@ function gameloop() {
             ball_y = 5;
             ball_vy *= -1;
         }
-        if (ball_y >= 595) {
-            ball_y = 595;
+        if (ball_y >= (canvas.height - 5)) {
+            ball_y = (canvas.height - 5);
             ball_vy *= -1;
         }
 
@@ -232,9 +234,9 @@ function gameloop() {
             }
         }
         if (
-            prev_ball_x <= 758 && ball_x >= 758 && (ball_y > right_y - 10 && ball_y < right_y + 90)
+            prev_ball_x <= (canvas.width - 48) && ball_x >= (canvas.width - 48) && (ball_y > right_y - 10 && ball_y < right_y + 90)
         ) {
-            ball_x = 758;
+            ball_x = (canvas.width - 48);
             ball_vx *= -1.2;
             if (Math.abs(ball_vx) > 20) {
                 ball_vx = ball_vx > 0 ? 20 : -20;
@@ -254,7 +256,7 @@ function gameloop() {
                     right_y -= 6;
                 }
             }
-            if ((ball_y > right_y + 40) && (right_y < 520)) {
+            if ((ball_y > right_y + 40) && (right_y < canvas.height - 80)) {
                 if (x < 10) {
                     right_y += 6;
                 }
@@ -276,7 +278,7 @@ function gameloop() {
 
     //draw the background
     ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, 800, 600);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     //draw the ball
     ctx.fillStyle = "white";
@@ -289,46 +291,46 @@ function gameloop() {
     ctx.fillRect(30, left_y, 12, 80);
 
     ctx.fillStyle = 'white';
-    ctx.fillRect(758, right_y, 12, 80);
+    ctx.fillRect(canvas.width - 42, right_y, 12, 80);
 
     ctx.fillStyle = "white";
     ctx.font = "48px monospace";
     ctx.textAlign = "center";
-    ctx.fillText(left_score, 300, 50);
-    ctx.fillText(right_score, 500, 50);
+    ctx.fillText(left_score, canvas.width / 2 - 100, 50);
+    ctx.fillText(right_score, canvas.width / 2 + 100, 50);
 
     //menu screen
     if (gameState === "menu") {
         ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, 800, 600);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = "white";
         ctx.font = "64px monospace";
         ctx.textAlign = "center";
-        ctx.fillText("PONG", 400, 200);
+        ctx.fillText("PONG", canvas.width / 2, canvas.height / 4);
 
         // ctx.font = "32px monospace";
         // ctx.fillText("Press Enter to Start", 400, 350);
 
         ctx.font = "32px monospace";
-        ctx.fillText("SinglePlayer 's'", 400, 400);
+        ctx.fillText("SinglePlayer 's'", canvas.width / 2, canvas.height / 2);
 
         ctx.font = "32px monospace";
-        ctx.fillText("Multiplayer 'm'", 400, 450);
+        ctx.fillText("Multiplayer 'm'", canvas.width / 2, canvas.height / 2 + 50);
     }
 
     //game over screen
     if (gameState == 'over') {
         ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-        ctx.fillRect(0, 0, 800, 600);
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = "white";
         ctx.font = "64px monospace";
         ctx.textAlign = "center";
         ctx.font = "24px monospace";
-        ctx.fillText(winner, 400, 300);
-        ctx.fillText("Press R to restart", 400, 400);
-        ctx.fillText("Press E to quit", 400, 500)
+        ctx.fillText(winner, canvas.width / 2, canvas.height / 2);
+        ctx.fillText("Press R to restart", canvas.width / 2, canvas.height / 2 + 80);
+        ctx.fillText("Press E to quit", canvas.width / 2, canvas.height / 2 + 200)
     }
 
     requestAnimationFrame(gameloop);
