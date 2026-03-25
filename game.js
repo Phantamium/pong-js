@@ -67,7 +67,7 @@ canvas.addEventListener("touchstart", (e) => {
     let y = touch.clientY;
 
     //singleplayer area
-    if (x > 200 && x < 600 && y > 250 && y < 30) {
+    if (x > 250 && x < 550 && y > 370 && y < 430) {
         gameType = "singlePlayer";
         gameState = "open"
     }
