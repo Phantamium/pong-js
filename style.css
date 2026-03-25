@@ -1,13 +1,15 @@
 body {
-    margin: 0;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
 canvas {
-  width: 100vw;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
   height: auto;
-  display: block;
 }
