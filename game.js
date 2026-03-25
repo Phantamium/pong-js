@@ -61,6 +61,18 @@ document.addEventListener("keyup", (e) => {
     keys[e.key] = false;
 })
 
+canvas.addEventListener("touchstart", (e) => {
+    let touch = e.touches[0];
+    let x = touch.clientX;
+    let y = touch.clientY;
+
+    //singleplayer area
+    if (x > 200 && x < 600 && y > 250 && y < 30) {
+        gameType = "singlePlayer";
+        gameState = "open"
+    }
+})
+
 
 
 function gameloop() {
@@ -73,11 +85,11 @@ function gameloop() {
         ball_y += ball_vy;
         if (keys['w'] && left_y > 0) left_y -= 6;
         if (keys['s'] && left_y < 520) left_y += 6;
-        if (gameType == "multiPlayer"){
+        if (gameType == "multiPlayer") {
             if (keys["ArrowUp"] && right_y > 0) right_y -= 6;
             if (keys["ArrowDown"] && right_y < 520) right_y += 6;
         }
-        
+
         left_paddle_vy = left_y - prev_left_y;
         right_paddle_vy = right_y - prev_right_y;
 
