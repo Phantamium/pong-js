@@ -79,7 +79,20 @@ canvas.addEventListener("click", (e) => {
     }
     if (gameState === "over") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
+            
+            left_score = 0;
+            right_score = 0;
+
+            ball_x = 400;
+            ball_y = 300;
+            ball_vx = 4;
+            ball_vy = 4;
+
+            left_y = 300;
+            right_y = 300;
+
             gameState = "menu";
+            winner = "";
         }
     }
 });
@@ -87,9 +100,8 @@ canvas.addEventListener("click", (e) => {
 canvas.addEventListener("touchstart", (e) => {
     let touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    let x = touch.clientX - rect.left;
-    let y = touch.clientY - rect.top;
-
+    let x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+    let y = (touch.clientY - rect.top) * (canvas.height / rect.height);
     //menu area
     if (gameState === "menu") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
@@ -106,7 +118,20 @@ canvas.addEventListener("touchstart", (e) => {
     //last gameover screen
     if (gameState === "over") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
+            
+            left_score = 0;
+            right_score = 0;
+
+            ball_x = 400;
+            ball_y = 300;
+            ball_vx = 4;
+            ball_vy = 4;
+
+            left_y = 300;
+            right_y = 300;
+
             gameState = "menu";
+            winner = "";
         }
     }
 })
