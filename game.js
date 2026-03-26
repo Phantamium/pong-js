@@ -181,8 +181,8 @@ function gameloop(timestamp) {
         prev_ball_x = ball_x;
         prev_left_y = left_y;
         prev_right_y = right_y;
-        ball_x += ball_vx * dt;
-        ball_y += ball_vy * dt;
+        ball_x += ball_vx
+        ball_y += ball_vy
         if (keys['w'] && left_y > 0) left_y -= 6;
         if (keys['s'] && left_y < 520) left_y += 6;
         if (gameType == "multiPlayer") {
