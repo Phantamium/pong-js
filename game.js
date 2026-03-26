@@ -5,8 +5,8 @@ let gameOver = false;
 let winner = "";
 let ball_x = 400;
 let ball_y = 300;
-let ball_vx = 40;
-let ball_vy = 40;
+let ball_vx = 240;
+let ball_vy = 240;
 let left_y = 300;
 let right_y = 300;
 let left_score = 0;
@@ -33,8 +33,8 @@ document.addEventListener("keydown", (e) => {
 
         ball_x = 400;
         ball_y = 300;
-        ball_vx = 40;
-        ball_vy = 40;
+        let ball_vx = 240;
+let ball_vy = 240;
 
         left_y = 300;
         right_y = 300;
@@ -86,8 +86,8 @@ canvas.addEventListener("click", (e) => {
 
             ball_x = 400;
             ball_y = 300;
-            ball_vx = 40;
-            ball_vy = 40;
+            let ball_vx = 240;
+let ball_vy = 240;
 
             left_y = 300;
             right_y = 300;
@@ -126,8 +126,8 @@ canvas.addEventListener("touchstart", (e) => {
 
             ball_x = 400;
             ball_y = 300;
-            ball_vx = 4;
-            ball_vy = 4;
+            let ball_vx = 240;
+let ball_vy = 240;
 
             left_y = 300;
             right_y = 300;
@@ -181,8 +181,8 @@ function gameloop(timestamp) {
         prev_ball_x = ball_x;
         prev_left_y = left_y;
         prev_right_y = right_y;
-        ball_x += ball_vx
-        ball_y += ball_vy
+        ball_x += ball_vx * dt;
+        ball_y += ball_vy * dt;
         if (keys['w'] && left_y > 0) left_y -= 6;
         if (keys['s'] && left_y < 520) left_y += 6;
         if (gameType == "multiPlayer") {
@@ -200,7 +200,7 @@ function gameloop(timestamp) {
             ball_y = 300
             const options = [-3, -2, -1, 1, 2, 3];
             ball_vy = options[Math.floor(Math.random() * options.length)];
-            ball_vx = 4
+            ball_vx = 240
         }
         if (ball_x >= 795) {
             left_score += 1;
@@ -209,7 +209,7 @@ function gameloop(timestamp) {
 
             const options = [-3, -2, -1, 1, 2, 3];
             ball_vy = options[Math.floor(Math.random() * options.length)];
-            ball_vx = -4;
+            ball_vx = -240;
         }
 
         if (ball_y <= 5) {
