@@ -228,12 +228,12 @@ function gameloop(timestamp) {
         ) {
             ball_x = 42;
             ball_vx *= -1.2;
-            if (Math.abs(ball_vx) > 20) {
-                ball_vx = ball_vx > 0 ? 20 : -20;
+            if (Math.abs(ball_vx) > 1200) {
+                ball_vx = ball_vx > 0 ? 1200 : -1200;
             }
             ball_vy += left_paddle_vy * 0.5;
-            if (Math.abs(ball_vy) < 2) {
-                ball_vy = ball_vy >= 0 ? 5 : -5;
+            if (Math.abs(ball_vy) < 120) {
+                ball_vy = ball_vy >= 0 ? 600 : -600;
             }
         }
         if (
@@ -241,12 +241,12 @@ function gameloop(timestamp) {
         ) {
             ball_x = 758;
             ball_vx *= -1.2;
-            if (Math.abs(ball_vx) > 20) {
-                ball_vx = ball_vx > 0 ? 20 : -20;
+            if (Math.abs(ball_vx) > 1200) {
+                ball_vx = ball_vx > 0 ? 1200 : -1200;
             }
             ball_vy += right_paddle_vy * 0.5;
-            if (Math.abs(ball_vy) < 2) {
-                ball_vy = ball_vy >= 0 ? 5 : -5;
+            if (Math.abs(ball_vy) < 120) {
+                ball_vy = ball_vy >= 0 ? 600 : -600;
             }
         }
 
