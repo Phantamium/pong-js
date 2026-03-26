@@ -5,8 +5,8 @@ let gameOver = false;
 let winner = "";
 let ball_x = 400;
 let ball_y = 300;
-let ball_vx = 4;
-let ball_vy = 4;
+let ball_vx = 400;
+let ball_vy = 400;
 let left_y = 300;
 let right_y = 300;
 let left_score = 0;
@@ -33,8 +33,8 @@ document.addEventListener("keydown", (e) => {
 
         ball_x = 400;
         ball_y = 300;
-        ball_vx = 4;
-        ball_vy = 4;
+        ball_vx = 400;
+        ball_vy = 400;
 
         left_y = 300;
         right_y = 300;
@@ -86,8 +86,8 @@ canvas.addEventListener("click", (e) => {
 
             ball_x = 400;
             ball_y = 300;
-            ball_vx = 4;
-            ball_vy = 4;
+            ball_vx = 400;
+            ball_vy = 400;
 
             left_y = 300;
             right_y = 300;
