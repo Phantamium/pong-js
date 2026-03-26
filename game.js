@@ -25,7 +25,7 @@ let prev_left_y = left_y;
 let prev_right_y = right_y;
 let left_paddle_vy = left_y - prev_left_y;
 let right_paddle_vy = right_y - prev_right_y;
-let lastTime = 0;
+let lastTime = 0;                               //added to fix the "everything getting faster on displays with more refresh rate" problem
 
 let gameState = 'menu';
 // let gameType = 'singleplayer'
@@ -73,8 +73,8 @@ document.addEventListener("keyup", (e) => {
 
 canvas.addEventListener("click", (e) => {
     const rect = canvas.getBoundingClientRect();
-    let x = (e.clientX - rect.left) * (canvas.width / rect.width);
-    let y = (e.clientY - rect.top) * (canvas.height / rect.height);
+    let x = (e.clientX - rect.left) * (800 / rect.width);
+    let y = (e.clientY - rect.top) * (600 / rect.height);
 
     if (gameState === "menu") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
@@ -111,8 +111,8 @@ canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
     let touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    let x = (touch.clientX - rect.left) * (canvas.width / rect.width);
-    let y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+    let x = (touch.clientX - rect.left) * (800 / rect.width);
+    let y = (touch.clientY - rect.top) * (600 / rect.height);
     //menu area
     if (gameState === "menu") {
         if (x > 250 && x < 550 && y > 370 && y < 430) {
@@ -144,13 +144,13 @@ canvas.addEventListener("touchstart", (e) => {
             winner = "";
         }
     }
-    if (x < (rect.width * (canvas.width / rect.width) / 2)) {
+    if (x < (rect.width * (800 / rect.width) / 2)) {
         // center paddle on finger
         left_y = y - 40; // 40 = half paddle height
         if (left_y < 0) left_y = 0;
         if (left_y > 520) left_y = 520;
     }
-    if (x > (rect.width * (canvas.width / rect.width) / 2)) {
+    if (x > (rect.width * (800 / rect.width) / 2)) {
         right_y = y - 40
         if (right_y < 0) right_y = 0;
         if (right_y > 520) right_y = 520
@@ -161,15 +161,15 @@ canvas.addEventListener("touchmove", (e) => {
     e.preventDefault();
     let touch = e.touches[0];
     const rect = canvas.getBoundingClientRect();
-    let x = (touch.clientX - rect.left) * (canvas.width / rect.width);
-    let y = (touch.clientY - rect.top) * (canvas.height / rect.height);
-    if (x < (rect.width * (canvas.width / rect.width) / 2)) {
+    let x = (touch.clientX - rect.left) * (800 / rect.width);
+    let y = (touch.clientY - rect.top) * (600 / rect.height);
+    if (x < (rect.width * (800 / rect.width) / 2)) {
         // center paddle on finger
         left_y = y - 40; // 40 = half paddle height
         if (left_y < 0) left_y = 0;
         if (left_y > 520) left_y = 520;
     }
-    if (x > (rect.width * (canvas.width / rect.width) / 2)) {
+    if (x > (rect.width * (800 / rect.width) / 2)) {
         right_y = y - 40
         if (right_y < 0) right_y = 0;
         if (right_y > 520) right_y = 520
@@ -206,7 +206,7 @@ function gameloop(timestamp) {
             right_score += 1
             ball_x = 400
             ball_y = 300
-            const options = [-3, -2, -1, 1, 2, 3];
+            const options = [-180, -120, -60, 60, 120, 180];
             ball_vy = options[Math.floor(Math.random() * options.length)];
             ball_vx = 240
         }
@@ -215,7 +215,7 @@ function gameloop(timestamp) {
             ball_x = 400;
             ball_y = 300;
 
-            const options = [-3, -2, -1, 1, 2, 3];
+            const options = [-180, -120, -60, 60, 120, 180];
             ball_vy = options[Math.floor(Math.random() * options.length)];
             ball_vx = -240;
         }
