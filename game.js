@@ -33,8 +33,8 @@ document.addEventListener("keydown", (e) => {
 
         ball_x = 400;
         ball_y = 300;
-        let ball_vx = 240;
-let ball_vy = 240;
+        ball_vx = 240;
+        ball_vy = 240;
 
         left_y = 300;
         right_y = 300;
@@ -86,8 +86,8 @@ canvas.addEventListener("click", (e) => {
 
             ball_x = 400;
             ball_y = 300;
-            let ball_vx = 240;
-let ball_vy = 240;
+            ball_vx = 240;
+            ball_vy = 240;
 
             left_y = 300;
             right_y = 300;
@@ -126,9 +126,8 @@ canvas.addEventListener("touchstart", (e) => {
 
             ball_x = 400;
             ball_y = 300;
-            let ball_vx = 240;
-let ball_vy = 240;
-
+            ball_vx = 240;
+            ball_vy = 240;
             left_y = 300;
             right_y = 300;
 
@@ -183,11 +182,11 @@ function gameloop(timestamp) {
         prev_right_y = right_y;
         ball_x += ball_vx * dt;
         ball_y += ball_vy * dt;
-        if (keys['w'] && left_y > 0) left_y -= 6;
-        if (keys['s'] && left_y < 520) left_y += 6;
+        if (keys['w'] && left_y > 0) left_y -= 360 * dt;
+        if (keys['s'] && left_y < 520) left_y += 360 * dt;
         if (gameType == "multiPlayer") {
-            if (keys["ArrowUp"] && right_y > 0) right_y -= 6;
-            if (keys["ArrowDown"] && right_y < 520) right_y += 6;
+            if (keys["ArrowUp"] && right_y > 0) right_y -= 360 * dt;
+            if (keys["ArrowDown"] && right_y < 520) right_y += 360 * dt;
         }
 
         left_paddle_vy = left_y - prev_left_y;
@@ -256,12 +255,12 @@ function gameloop(timestamp) {
             let x = Math.floor(Math.random() * 10) + 1;
             if ((ball_y < (right_y + 40)) && (right_y > 0)) {
                 if (x < 10) {
-                    right_y -= 6;
+                    right_y -= 360 * dt;
                 }
             }
             if ((ball_y > right_y + 40) && (right_y < 520)) {
                 if (x < 10) {
-                    right_y += 6;
+                    right_y += 360 * dt;
                 }
             }
         }
