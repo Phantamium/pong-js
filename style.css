@@ -1,4 +1,4 @@
-/* body {
+body {
   margin: 0;
   background: black;
   display: flex;
@@ -13,9 +13,5 @@ canvas {
   max-height: 100vh;
   width: auto;
   height: auto;
-} */
-
-body {
-  margin: 0;
-  background: black;
 }
+
