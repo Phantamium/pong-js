@@ -1,6 +1,15 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+//fixing the blurry-ness of the text on larger screens with more pixels to display
+
+const dpr = window.devicePixelRatio || 1;
+canvas.width = 800 * dpr;
+canvas.height = 600 * dpr;
+canvas.style.width = "800px";
+canvas.style.height = "600px";
+ctx.scale(dpr, dpr);
+
 let gameOver = false;
 let winner = "";
 let ball_x = 400;
