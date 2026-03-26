@@ -16,6 +16,7 @@ let prev_left_y = left_y;
 let prev_right_y = right_y;
 let left_paddle_vy = left_y - prev_left_y;
 let right_paddle_vy = right_y - prev_right_y;
+let lastTime = 0;
 
 let gameState = 'menu';
 // let gameType = 'singleplayer'
@@ -170,14 +171,18 @@ canvas.addEventListener("touchmove", (e) => {
 
 
 
-function gameloop() {
+function gameloop(timestamp) {
+    //to fix the framerate issue
+    let dt = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
     //update
     if (gameState == "open") {                //checks if either of the player has won and only continues the the game function if it hasn't
         prev_ball_x = ball_x;
         prev_left_y = left_y;
         prev_right_y = right_y;
-        ball_x += ball_vx;
-        ball_y += ball_vy;
+        ball_x += ball_vx * dt;
+        ball_y += ball_vy * dt;
         if (keys['w'] && left_y > 0) left_y -= 6;
         if (keys['s'] && left_y < 520) left_y += 6;
         if (gameType == "multiPlayer") {
